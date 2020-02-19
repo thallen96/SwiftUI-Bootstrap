@@ -1,0 +1,34 @@
+PODS:
+  - PromisesObjC (1.2.8)
+  - PromisesSwift (1.2.8):
+    - PromisesObjC (= 1.2.8)
+  - SDWebImage (5.3.1):
+    - SDWebImage/Core (= 5.3.1)
+  - SDWebImage/Core (5.3.1)
+  - SDWebImageSwiftUI (0.8.4):
+    - SDWebImage (~> 5.3)
+  - SwiftyBeaver (1.8.3)
+
+DEPENDENCIES:
+  - PromisesSwift
+  - SDWebImageSwiftUI
+  - SwiftyBeaver
+
+SPEC REPOS:
+  trunk:
+    - PromisesObjC
+    - PromisesSwift
+    - SDWebImage
+    - SDWebImageSwiftUI
+    - SwiftyBeaver
+
+SPEC CHECKSUMS:
+  PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
+  PromisesSwift: 37bad6f4daddb02f7c9c531efe91e8b21c13ee2f
+  SDWebImage: 7137d57385fb632129838c1e6ab9528a22c666cc
+  SDWebImageSwiftUI: ba0f2293a929c787d60568a35e46c7c6a9030e8c
+  SwiftyBeaver: 3d3e93a12d648bd400b6f2948a7ef128b5b183c7
+
+PODFILE CHECKSUM: 88a33f6ca657478fffb96c7030062bcf055b991f
+
+COCOAPODS: 1.8.4
