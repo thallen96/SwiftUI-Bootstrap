@@ -29,6 +29,7 @@
 		E86ED4F623FDBC0C000A93F3 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86ED4F523FDBC0C000A93F3 /* Fonts.swift */; };
 		E86ED4F823FDC0BF000A93F3 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86ED4F723FDC0BF000A93F3 /* Extensions.swift */; };
 		E86ED4FA23FDD3B5000A93F3 /* SFSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86ED4F923FDD3B5000A93F3 /* SFSymbols.swift */; };
+		E86ED4FC23FF1572000A93F3 /* ProfilePic.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86ED4FB23FF1572000A93F3 /* ProfilePic.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,7 @@
 		E86ED4F523FDBC0C000A93F3 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Fonts.swift; path = bootstrap/Resources/Fonts.swift; sourceTree = SOURCE_ROOT; };
 		E86ED4F723FDC0BF000A93F3 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		E86ED4F923FDD3B5000A93F3 /* SFSymbols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSymbols.swift; sourceTree = "<group>"; };
+		E86ED4FB23FF1572000A93F3 /* ProfilePic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfilePic.swift; path = bootstrap/Resources/ProfilePic.swift; sourceTree = SOURCE_ROOT; };
 		F5D1C00F502F75258263D3A5 /* Pods_bootstrapTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bootstrapTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -259,6 +261,7 @@
 		E018215D23FD741F006F9593 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				E86ED4FB23FF1572000A93F3 /* ProfilePic.swift */,
 			);
 			path = Image;
 			sourceTree = "<group>";
@@ -562,6 +565,7 @@
 				E018212523FD729F006F9593 /* AppDelegate.swift in Sources */,
 				E86ED4F123FDAF79000A93F3 /* ComplexView.swift in Sources */,
 				E86ED4F623FDBC0C000A93F3 /* Fonts.swift in Sources */,
+				E86ED4FC23FF1572000A93F3 /* ProfilePic.swift in Sources */,
 				E86ED4F323FDAFFC000A93F3 /* TitleViews.swift in Sources */,
 				E018215923FD73CC006F9593 /* Style+Extensions.swift in Sources */,
 				E86ED4F823FDC0BF000A93F3 /* Extensions.swift in Sources */,
