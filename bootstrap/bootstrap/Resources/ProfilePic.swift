@@ -5,86 +5,69 @@
 //  Created by Elizabeth Johnston on 2/20/20.
 //  Copyright © 2020 CapTech Consulting. All rights reserved.
 //
+// - Custom image styles and declarations ideal for uploading and displaying profile pictures
+/// Though they are designed for the purpose of profile pictures, they are examples for custom image style declarations and image extension declarations
 
 import SwiftUI
-import Firebase
-import FirebaseUI
 import SDWebImageSwiftUI
 
 
-// TODO: Update this class to handle dynamic images
+//MARK: - PROFILE IMAGES
+// pre-defined, reusable image formats to quickly render
+
 struct ProfilePicture: View {
-    let color: Color
+    //- dispalys a WebImage in a cropped circle with a custom colored border and .homeStyle styling
+    let borderColor: Color
     let borderWidth: CGFloat
-    let picURL: URL?
+    let imageURL: URL?
         
     var body: some View {
-        WebImage(url: picURL)
+        WebImage(url: imageURL)
             .onSuccess { image, cacheType in
-                // Implement im memory caching when I have time
-                print("ProfilePicture - image loaded.. \(String(describing: self.picURL))")
+                print("ProfilePicture - image loaded.. \(String(describing: self.imageURL))")
             }
             .homeStyle
             .overlay(
-                Circle().stroke(self.color, lineWidth: self.borderWidth))
-    }
-}
-
-// TODO: Update this class to handle dynamic images
-struct SimplePictureGrey: View {
-    // has "background" background color
-    let url: URL?
-        
-    var body: some View {
-        WebImage(url: url)
-            .onSuccess { image, cacheType in
-                // Implement im memory caching when I have time
-                print("ProfilePicture - image loaded..")
-            }
-            .simpleGrey
+                Circle().stroke(self.borderColor, lineWidth: self.borderWidth)
+            )
     }
 }
 
 struct SimplePicture: View {
-    // has no background color
-    let url: URL?
-        
+    //- displays a web image with .simple styling
+    let imageURL: URL?
+    
     var body: some View {
-        WebImage(url: url)
+        WebImage(url: imageURL)
             .onSuccess { image, cacheType in
-                // Implement im memory caching when I have time
-                print("ProfilePicture - image loaded..")
+                print("SimplePicture - image loaded.. \(String(describing: self.imageURL))")
             }
             .simple
     }
 }
 
-struct uploadedImage: View {
-    let color: Color
+struct UploadedImage: View {
+    //- dispalys a UIImage in a cropped circle with a custom colored border, default system "photo" if image is nil, white background color if nil
+    /// ideal for displaying an image selected from photos
+    let borderColor: Color
     let borderWidth: CGFloat
+    let backgroundColor: Color?
     let image: UIImage?
     
     var body: some View {
         Image(uiImage: image ?? UIImage(systemName: "photo")!)
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-            .clipShape(Circle())
+            .simple
+            .background(backgroundColor ?? Color.white)
+            .overlay(
+                Circle().stroke(self.borderColor, lineWidth: self.borderWidth))
     }
 }
 
+
+//MARK: - WEBIMAGE EXTENSIONS
+// pre-defined styles to quickly apply to WebImages
+
 extension WebImage {
-    
-    var simpleGrey: some View {
-        self
-            .resizable()
-            .placeholder {
-                Image(systemName: "photo") // Placeholder
-            }
-            //.indicator(.activity) // Activity Indicator
-            .background(Color.background)
-            .aspectRatio(contentMode: .fill)
-            .clipShape(Circle())
-    }
     
     var simple: some View {
         self
@@ -92,7 +75,7 @@ extension WebImage {
             .placeholder {
                 Image(systemName: "photo") // Placeholder
             }
-            //.indicator(.activity) // Activity Indicator
+            .background(Color.gray)
             .aspectRatio(contentMode: .fill)
             .clipShape(Circle())
     }
@@ -101,14 +84,26 @@ extension WebImage {
         self
             .resizable()
             .placeholder {
-                Image(General_Icons.profile_placeholder) // Placeholder
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
+                Image(systemName: SFSymbols.person)
+                    .foregroundColor(Color.white)
             }
-            .indicator(.activity) // Activity Indicator
-            .background(Color.background)
+            .indicator(.activity)           ///**TIP** .inidicator is best defined after frame size is defined but is here to conform to dynamic size.
+            .background(Color.gray)
             .aspectRatio(contentMode: .fill)
             .clipShape(Circle())
+    }
+    
+}
+
+//MARK: - IMAGE EXTENSIONS
+// pre-defined styles to quickly apply to Images
+
+extension Image {
+    
+    var simple: some View {
+        self
+            .resizable()
+            .aspectRatio(contentMode: .fill)
     }
     
 }

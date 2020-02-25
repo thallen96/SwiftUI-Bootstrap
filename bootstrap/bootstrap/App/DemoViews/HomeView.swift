@@ -9,8 +9,26 @@
 import SwiftUI
 
 struct HomeView: View {
+    
+    @State var selected: Int? {
+        didSet{
+            print(_selected)
+        }
+    }
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack{
+            VStack{
+                NavigationBarView(title: "Welcome to hell" , leftButton: NavButton.back(tapFunction: {}, color: nil), rightButton: NavButton.profilePic(imageURL: nil, caption: "Gary", tapFunction: {}), backgroundColor: nil, titleColor: nil)
+                Spacer()
+            }
+            VStack{
+                Spacer()
+                // been using as workspace for testing components 
+                Spacer()
+            }
+        }.edgesIgnoringSafeArea(.bottom)
+            .background(Color.white)
     }
 }
 

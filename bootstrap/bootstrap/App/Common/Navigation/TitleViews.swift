@@ -24,15 +24,15 @@ struct NavigationBarView: View{
     var title: String?
     var leftButton: NavButton?
     var rightButton: NavButton?
-    var backgroundColor: UIColor?
-    var titleColor: UIColor?
+    var backgroundColor: Color?
+    var titleColor: Color?
     
     
     //MARK: BODY
     var body: some View {
         ZStack {
             Rectangle()
-                .fill(backgroundColor ?? Color.white)                  /// ** TIP ** change nav  bar background color here
+                .fill(backgroundColor ?? Color.white)
             ZStack {
                 // Title
                 HStack {
@@ -48,14 +48,15 @@ struct NavigationBarView: View{
                     leftButton?.view()
                     Spacer()
                 }
-                // Right corner: profile picture
+                // Right corner
                 HStack {
                     Spacer()
                     rightButton?.view()
                 }
             }.frame(height: 65)
             .padding(.horizontal, 20)
-        }.padding(.bottom, 10)
+        }.frame(minWidth: 0, idealWidth: 375, maxWidth: .infinity, minHeight: 75, idealHeight: 75, maxHeight: 75, alignment: .top)
+            .padding(.bottom, 10)
     }
 }
 
@@ -66,19 +67,21 @@ struct NavigationBarView: View{
 enum NavButton {
     //buttons that can be added to a navigation bar
     
-    case back(tapFunction: ()->Void, color: UIColor?)
+    case back(tapFunction: ()->Void, color: Color?)
     case image(imageName: String, tapFunction: ()->Void)
-    case text(text: String, tapFunction: ()->Void, color: UIColor?)
-    case profilePic(imageName: String?, caption: String?, tapFunction: ()->Void)
+    case text(text: String, tapFunction: ()->Void, color: Color?)
+    case profilePic(imageURL: URL?, caption: String?, tapFunction: ()->Void)
     
-    func view() -> some View {
+    func view() -> AnyView {
         //- returns the view associated with the proper button
         switch self {
         
+            //- BACK
         case let .back(tapFunction: tapFunction, color: color):
             return
+                AnyView(
                     HStack {
-                        Image(SFSymbols.chevron_left)
+                        Image(systemName: SFSymbols.chevron_left)
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 7, height: 13, alignment: .leading)
@@ -92,42 +95,53 @@ enum NavButton {
                         tapFunction()
                     }
                     .foregroundColor(color ?? .blue)
+            )
             
+            //- IMAGE
         case let .image(imageName: imageName, tapFunction: tapFunction):
             return
-                Image(imageName)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 58.93, height: 27.79, alignment: .leading)
-                    .onTapGesture {
-                        tapFunction()
-                    }
-        
+                AnyView(
+                    Image(imageName)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 58.93, height: 27.79, alignment: .leading)
+                        .onTapGesture {
+                            tapFunction()
+                        }
+                )
+
+            //- TEXT
         case let .text(text: text, tapFunction: tapFunction, color: color):
             return
-                Text(text)
-                    .scaledFont(name: Avenir_Fonts.medium, size: 13)
-                    .frame(width: 35, height: 18, alignment: .leading)
-                    .foregroundColor(color ?? .blue)
-                    .onTapGesture {
-                        tapFunction()
-                    }
-            
-        case let .profilePic(imageName: imageName, caption: caption, tapFunction: tapFunction):
-            return
-                VStack {
-                    ProfilePicture(color: Color.level1, borderWidth: 1, picURL: imageName)
-                        .TapGesture{
-                            tapFunction
+                AnyView(
+                    Text(text)
+                        .scaledFont(name: Avenir_Fonts.medium, size: 13)
+                        .frame(width: 35, height: 18, alignment: .leading)
+                        .foregroundColor(color ?? .blue)
+                        .onTapGesture {
+                            tapFunction()
                         }
-                        .frame(width: 38, height: 38, alignment: .top)
-                    
-                    Text(caption ?? "")
-                        .caption
-                        .frame(width: 38, height: 11, alignment: .center)
-                }
-                .padding()
-            
+                )
+
+            //- PROFILE PIC
+        case let .profilePic(imageURL: imageURL, caption: caption, tapFunction: tapFunction):
+            return
+                AnyView(
+                    VStack {
+                        ProfilePicture(borderColor: Color.blue, borderWidth: 1, imageURL: imageURL)
+                            .gesture(
+                                TapGesture()
+                                    .onEnded{ _ in
+                                        tapFunction()
+                            })
+                            .frame(width: 38, height: 38, alignment: .top)
+
+                        Text(caption ?? "")
+                            .caption
+                            .frame(width: 38, height: 11, alignment: .center)
+                    }
+                    .padding()
+                )
         }
     }
    

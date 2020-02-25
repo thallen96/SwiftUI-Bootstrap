@@ -14,5 +14,5 @@ struct SFSymbols {
     
     static let chevron_left = "chevron.left"
     static let chevron_right = "chevron.right"
-    
+    static let person = "person"
 }
