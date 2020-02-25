@@ -184,7 +184,7 @@ struct ListRadioButtons: View {
     }
 }
 
-//MARK: SUBVIEWS AND FUNCTIONS
+//MARK: SUBVIEWS
 extension ListRadioButtons {
     
     var buttons: some View {
