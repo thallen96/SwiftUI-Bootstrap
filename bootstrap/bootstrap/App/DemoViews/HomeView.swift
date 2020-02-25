@@ -10,11 +10,9 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @State var selected: Int? {
-        didSet{
-            print(_selected)
-        }
-    }
+    @State var selected: VolumeButton.VolumeLevel = VolumeButton.VolumeLevel.high
+    
+    @State var power: Bool = false
     
     var body: some View {
         ZStack{
@@ -24,7 +22,8 @@ struct HomeView: View {
             }
             VStack{
                 Spacer()
-                // been using as workspace for testing components 
+                // been using as workspace for testing components
+                PowerButton(power: self.$power)
                 Spacer()
             }
         }.edgesIgnoringSafeArea(.bottom)
