@@ -206,52 +206,52 @@ extension ISO8601DateFormatter {
     }
 }
 
-// MARK: - DOCUMENT SNAPSHOT EXTENSIONS
-//TODO: Thomas, did we ever use these? Did you want to include them? (question applies to Encodable and QuerySnapshot as well)
-extension DocumentSnapshot {
-    
-    // MARK: Returns decoded object as publisher
-    func decoded<T: Codable>() -> AnyPublisher<T,FirebaseError> {
-        let jsonData = try! JSONSerialization.data(withJSONObject: data()!, options: [])
-        
-        let decoder = JSONDecoder()
-        decoder.dataDecodingStrategy = .deferredToData
-        
-        return Just(jsonData)
-            .decode(type: T.self, decoder: decoder)
-            .mapError { error in
-                .codableDocument(description: error.localizedDescription)
-        }
-        .eraseToAnyPublisher()
-    }
-    
-    // MARK: Returns individual decoded object
-    func decodeToObject<T: Codable>() throws -> T {
-        do {
-            let jsonData = try JSONSerialization.data(withJSONObject: data()!, options: [])
-            let object = try JSONDecoder().decode(T.self, from: jsonData)
-            return object
-        } catch {
-            log.error("Extension. decodeToObject: \(error.localizedDescription)")
-            throw error
-        }
-    }
-}
+//// MARK: - DOCUMENT SNAPSHOT EXTENSIONS
+////TODO: Thomas, did we ever use these? Did you want to include them? (question applies to Encodable and QuerySnapshot as well)
+//extension DocumentSnapshot {
+//
+//    // MARK: Returns decoded object as publisher
+//    func decoded<T: Codable>() -> AnyPublisher<T,FirebaseError> {
+//        let jsonData = try! JSONSerialization.data(withJSONObject: data()!, options: [])
+//
+//        let decoder = JSONDecoder()
+//        decoder.dataDecodingStrategy = .deferredToData
+//
+//        return Just(jsonData)
+//            .decode(type: T.self, decoder: decoder)
+//            .mapError { error in
+//                .codableDocument(description: error.localizedDescription)
+//        }
+//        .eraseToAnyPublisher()
+//    }
+//
+//    // MARK: Returns individual decoded object
+//    func decodeToObject<T: Codable>() throws -> T {
+//        do {
+//            let jsonData = try JSONSerialization.data(withJSONObject: data()!, options: [])
+//            let object = try JSONDecoder().decode(T.self, from: jsonData)
+//            return object
+//        } catch {
+//            log.error("Extension. decodeToObject: \(error.localizedDescription)")
+//            throw error
+//        }
+//    }
+//}
 
-extension Encodable {
-    
-    func toJson() throws ->  [String: Any] {
-        let encoder = JSONEncoder()
-//        encoder.dateEncodingStrategy = .secondsSince1970
-//        encoder.dateEncodingStrategy = .iso8601
-//        encoder.dateEncodingStrategy = .iso8601withFractionalSeconds
-        let data = try encoder.encode(self)
-        let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
-        guard let json = jsonObject as? [String: Any] else { throw FirebaseError.codableCollection(description: FirebaseErrorMessages.encodingFailed) }
-        
-        return json
-    }
-}
+//extension Encodable {
+//
+//    func toJson() throws ->  [String: Any] {
+//        let encoder = JSONEncoder()
+////        encoder.dateEncodingStrategy = .secondsSince1970
+////        encoder.dateEncodingStrategy = .iso8601
+////        encoder.dateEncodingStrategy = .iso8601withFractionalSeconds
+//        let data = try encoder.encode(self)
+//        let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
+//        guard let json = jsonObject as? [String: Any] else { throw FirebaseError.codableCollection(description: FirebaseErrorMessages.encodingFailed) }
+//
+//        return json
+//    }
+//}
 
 //extension JSONDecoder.DateDecodingStrategy {
 //    static let iso8601withFractionalSeconds = custom {
@@ -273,13 +273,13 @@ extension Encodable {
 //}
 
 // MARK: - QUERY SNAPSHOT EXTENSIONS
-extension QuerySnapshot {
-    
-    func decoded<T: Codable>()  -> [T] {
-        let objects: [T] = try! documents.map{ try $0.decodeToObject() }
-        return objects
-    }
-}
+//extension QuerySnapshot {
+//    
+//    func decoded<T: Codable>()  -> [T] {
+//        let objects: [T] = try! documents.map{ try $0.decodeToObject() }
+//        return objects
+//    }
+//}
 
 
 // MARK: - VIEW EXTENSIONS
@@ -291,11 +291,11 @@ extension View {
         return overlay(RoundedRectangle(cornerRadius: cornerRadius).strokeBorder(content, lineWidth: width))
     }
 
-    func alert(forAlert state: Binding<AlertState>) -> some View {
-        return self.alert(isPresented: state.visible) {
-            AlertView.alert(forAlert: state.wrappedValue)
-        }
-    }
+//    func alert(forAlert state: Binding<AlertState>) -> some View {
+//        return self.alert(isPresented: state.visible) {
+//            AlertView.alert(forAlert: state.wrappedValue)
+//        }
+//    }
     
     //
     @available(iOS 13, macCatalyst 13, tvOS 13, watchOS 6, *)

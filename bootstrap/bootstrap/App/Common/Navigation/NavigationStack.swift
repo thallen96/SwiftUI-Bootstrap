@@ -51,7 +51,8 @@ final class NavigationStack: ObservableObject {
     //- Returns to the dashboard home view
     func home(){
         viewStack.removeAll()
-        currentView = NavigationItem( view: AnyView(HomeView(environmentObject)))
+//        currentView = NavigationItem( view: AnyView(HomeView(environmentObject)))
+        currentView = NavigationItem( view: AnyView(HomeView()))
     }
     
     //- returns to current stacks root view

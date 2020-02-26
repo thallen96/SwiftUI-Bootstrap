@@ -23,8 +23,7 @@ extension Button {
     
     var primaryStyle : some View {
         self
-            .padding(.vertical, 12)
-            .frame(width: 337, height: 34)
+            .padding(10)
             .font(.custom(Avenir_Fonts.medium, size: 17))
             .foregroundColor(.white)
             .background(Color.blue)

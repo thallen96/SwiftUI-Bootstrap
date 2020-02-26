@@ -15,4 +15,11 @@ struct SFSymbols {
     static let chevron_left = "chevron.left"
     static let chevron_right = "chevron.right"
     
+    static let person = "person"
+    
+    static let speaker_slash = "speaker.slash.fill"
+    static let speaker1 = "speaker.1.fill"
+    static let speaker2 = "speaker.2.fill"
+    static let speaker3 = "speaker.3.fill"
+    static let power = "power"
 }
