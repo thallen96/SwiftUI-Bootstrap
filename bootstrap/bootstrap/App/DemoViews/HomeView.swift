@@ -12,6 +12,8 @@ struct HomeView: View {
     
     @State var selected: VolumeButton.VolumeLevel = VolumeButton.VolumeLevel.high
     
+    @State var events: [Date] = [Date]()
+    
     @State var power: Bool = false
     
     var body: some View {
@@ -23,12 +25,34 @@ struct HomeView: View {
             VStack{
                 Spacer()
                 // been using as workspace for testing components
-                PowerButton(power: self.$power)
+                HeatMapCalendar(events: $events, heatColor: Color.blue)
                 Spacer()
             }
         }
-        .background(Color.white)
+            .background(Color.white)
+        .onAppear{
+            self.addFakeEvents()
+        }
     }
+}
+
+extension HomeView{
+    
+    func addFakeEvents() {
+        var tempEvents = [Date]()
+        
+        for day in 1...28 {
+            for _ in 0...Int.random(in: 0...6){
+                tempEvents.append(Formatter.dateShort.date(from: "02/\(String(day))/2020") ?? Date())
+            }
+        }
+        tempEvents.append(Formatter.dateShort.date(from: "03/3/2020") ?? Date())
+        tempEvents.append(Formatter.dateShort.date(from: "03/3/2020") ?? Date())
+        tempEvents.append(Formatter.dateShort.date(from: "03/4/2020") ?? Date())
+
+        self.events = tempEvents
+    }
+    
 }
 
 struct HomeView_Previews: PreviewProvider {
