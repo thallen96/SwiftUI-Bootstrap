@@ -34,6 +34,9 @@ extension Date {
     var hourMedium: String     { return Formatter.hourMedium.string(from: self) }
     
     var amPM: String         { return Formatter.amPM.string(from: self) }
+    
+    var dateMedium: String         { return Formatter.dateMedium.string(from: self) }
+
         
     
     
@@ -117,6 +120,18 @@ extension Formatter {
         return formatter
     }()
     
+    static let dateMedium: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMMM d, yyyy"
+        return formatter
+    }()
+    
+    static let dateShort: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM/d/yyyy"
+        return formatter
+    }()
+    
     
     //- Functions to convert string to date based on defined format(s)
     
@@ -192,6 +207,26 @@ extension Formatter {
         print("date formatting error: \(startDateString)")
         return ""
     }
+    
+    
+    func dateBetweenChecker(startDate: Date?, endDate: Date?, checkDate: Date?) -> Bool {
+        //- Check if the date is between (not equal to) the start and end date
+        /// NOTE: only compares dates, sets times to 00:00:00 to avoid confliction
+        
+        if checkDate == nil || startDate == nil || endDate == nil {return false}
+        
+
+        if let start = Calendar.current.date(bySettingHour: 0, minute: 00, second: 0, of: startDate ?? Date()) , let end = Calendar.current.date(bySettingHour: 0, minute: 00, second: 0, of: endDate ?? Date()) , let check = Calendar.current.date(bySettingHour: 0, minute: 00, second: 0, of: checkDate ?? Date()) {    /// note: dates are optional but will never default to Date since it's being checked before
+            //create copies of dates with time values of 00:00:00
+        
+            if check > start && check < end {
+                //if after start and before end, return true
+                return true
+            }
+        }
+        return false
+    }
+    
 
 }
 
