@@ -93,6 +93,19 @@ extension Text {
             .foregroundColor(Color.gray)
     }
     
+    //- Example of basic welcome screen styles
+    var welcomeHeaderStyle: some View {
+        self
+            .font(.custom(Avenir_Fonts.heavy, size: 20))
+            .foregroundColor(Color.gray)
+    }
+    
+    var welcomeCaptionStyle: some View {
+        self
+            .font(.custom(Avenir_Fonts.heavy, size: 15))
+            .foregroundColor(Color.gray)
+    }
+    
     
     // - Example of additional Text element styling
 

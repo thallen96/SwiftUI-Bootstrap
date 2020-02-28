@@ -9,15 +9,17 @@
 import SwiftUI
 import SDWebImage
 
+@available(iOS 13.0, OSX 10.15, tvOS 13.0, watchOS 6.0, *)
 class ImageManager : ObservableObject {
     @Published var image: PlatformImage? // loaded image, note when progressive loading, this will published multiple times with different partial image
     @Published var isLoading: Bool = false // whether network is loading or cache is querying, should only be used for indicator binding
     @Published var progress: CGFloat = 0 // network progress, should only be used for indicator binding
     
-    var manager = SDWebImageManager.shared
+    var manager: SDWebImageManager
     weak var currentOperation: SDWebImageOperation? = nil
     var isSuccess: Bool = false // true means request for this URL is ended forever, load() do nothing
     var isIncremental: Bool = false // true means during incremental loading
+    var isFirstLoad: Bool = true // false after first call `load()`
     
     var url: URL?
     var options: SDWebImageOptions
@@ -30,9 +32,15 @@ class ImageManager : ObservableObject {
         self.url = url
         self.options = options
         self.context = context
+        if let manager = context?[.customManager] as? SDWebImageManager {
+            self.manager = manager
+        } else {
+            self.manager = .shared
+        }
     }
     
     func load() {
+        isFirstLoad = false
         if currentOperation != nil {
             return
         }

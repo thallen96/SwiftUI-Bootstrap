@@ -9,12 +9,10 @@
 import SwiftUI
 import SDWebImage
 
-/// A Image View type to load image from url. Supports static image format.
+/// A Image View type to load image from url. Supports static/animated image format.
+@available(iOS 13.0, OSX 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct WebImage : View {
-    var url: URL?
-    var options: SDWebImageOptions
-    var context: [SDWebImageContextOption : Any]?
-    
+    static var emptyImage = PlatformImage()
     var configurations: [(Image) -> Image] = []
     
     var placeholder: AnyView?
@@ -23,32 +21,62 @@ public struct WebImage : View {
     
     @ObservedObject var imageManager: ImageManager
     
+    // Animated Image support (Beta)
+    var animated: Bool = false
+    @State var currentFrame: PlatformImage? = nil
+    @State var imagePlayer: SDAnimatedImagePlayer? = nil
+    
     /// Create a web image with url, placeholder, custom options and context.
     /// - Parameter url: The image url
     /// - Parameter options: The options to use when downloading the image. See `SDWebImageOptions` for the possible values.
     /// - Parameter context: A context contains different options to perform specify changes or processes, see `SDWebImageContextOption`. This hold the extra objects which `options` enum can not hold.
     public init(url: URL?, options: SDWebImageOptions = [], context: [SDWebImageContextOption : Any]? = nil) {
-        self.url = url
-        self.options = options
-        self.context = context
         self.imageManager = ImageManager(url: url, options: options, context: context)
-        // load remote image here, SwiftUI sometimes will create a new View struct without calling `onAppear` (like enter EditMode) :)
-        // this can ensure we load the image, SDWebImage take care of the duplicated query
-        self.imageManager.load()
     }
     
     public var body: some View {
-        Group {
+        // load remote image when first called `body`, SwiftUI sometimes will create a new View struct without calling `onAppear` (like enter EditMode) :)
+        // this can ensure we load the image, and display image synchronously when memory cache hit to avoid flashing
+        // called once per struct, SDWebImage take care of the duplicated query
+        if imageManager.isFirstLoad {
+            imageManager.load()
+        }
+        return Group {
             if imageManager.image != nil {
-                configurations.reduce(Image(platformImage: imageManager.image!)) { (previous, configuration) in
-                    configuration(previous)
+                if animated {
+                    if currentFrame != nil {
+                        configurations.reduce(Image(platformImage: currentFrame!)) { (previous, configuration) in
+                            configuration(previous)
+                        }
+                        .onAppear {
+                            self.imagePlayer?.startPlaying()
+                        }
+                        .onDisappear {
+                            self.imagePlayer?.pausePlaying()
+                        }
+                    } else {
+                        configurations.reduce(Image(platformImage: imageManager.image!)) { (previous, configuration) in
+                            configuration(previous)
+                        }
+                        .onReceive(imageManager.$image) { image in
+                            self.setupPlayer(image: image)
+                        }
+                    }
+                } else {
+                    configurations.reduce(Image(platformImage: imageManager.image!)) { (previous, configuration) in
+                        configuration(previous)
+                    }
                 }
             } else {
                 Group {
                     if placeholder != nil {
                         placeholder
                     } else {
-                        EmptyView()
+                        // Should not use `EmptyView`, which does not respect to the container's frame modifier
+                        // Using a empty image instead for better compatible
+                        configurations.reduce(Image(platformImage: WebImage.emptyImage)) { (previous, configuration) in
+                            configuration(previous)
+                        }
                     }
                 }
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
@@ -71,6 +99,7 @@ public struct WebImage : View {
 }
 
 // Layout
+@available(iOS 13.0, OSX 10.15, tvOS 13.0, watchOS 6.0, *)
 extension WebImage {
     func configure(_ block: @escaping (Image) -> Image) -> WebImage {
         var result = self
@@ -108,6 +137,7 @@ extension WebImage {
 }
 
 // Completion Handler
+@available(iOS 13.0, OSX 10.15, tvOS 13.0, watchOS 6.0, *)
 extension WebImage {
     
     /// Provide the action when image load fails.
@@ -139,12 +169,13 @@ extension WebImage {
 }
 
 // WebImage Modifier
+@available(iOS 13.0, OSX 10.15, tvOS 13.0, watchOS 6.0, *)
 extension WebImage {
     
     /// Associate a placeholder when loading image with url
     /// - note: The differences between Placeholder and Indicator, is that placeholder does not supports animation, and return type is different
     /// - Parameter content: A view that describes the placeholder.
-    public func placeholder<T>(@ViewBuilder _ content: () -> T) -> WebImage where T : View {
+    public func placeholder<T>(@ViewBuilder content: () -> T) -> WebImage where T : View {
         var result = self
         result.placeholder = AnyView(content())
         return result
@@ -179,6 +210,7 @@ extension WebImage {
 }
 
 // Indicator
+@available(iOS 13.0, OSX 10.15, tvOS 13.0, watchOS 6.0, *)
 extension WebImage {
     
     /// Associate a indicator when loading image with url
@@ -194,7 +226,54 @@ extension WebImage {
     }
 }
 
+// Animated Image support (Beta)
+@available(iOS 13.0, OSX 10.15, tvOS 13.0, watchOS 6.0, *)
+extension WebImage {
+    
+    /// Make the image to support animated images. The animation will start when view appears, and pause when disappears.
+    /// - Note: Currently we do not have advanced control like binding, reset frame index, playback rate, etc. For those use case, it's recommend to use `AnimatedImage` type instead. (support iOS/tvOS/macOS)
+    /// - Warning: This API need polishing. In the future we may choose to create a new View type instead.
+    ///
+    /// - Parameter animated: Whether or not to enable animationn.
+    public func animated(_ animated: Bool = true) -> WebImage {
+        var result = self
+        result.animated = animated
+        if animated {
+            // Update Image Manager
+            result.imageManager.cancel()
+            var context = result.imageManager.context ?? [:]
+            context[.animatedImageClass] = SDAnimatedImage.self
+            result.imageManager.context = context
+            result.imageManager.load()
+        } else {
+            // Update Image Manager
+            result.imageManager.cancel()
+            var context = result.imageManager.context ?? [:]
+            context[.animatedImageClass] = nil
+            result.imageManager.context = context
+            result.imageManager.load()
+        }
+        return result
+    }
+    
+    func setupPlayer(image: PlatformImage?) {
+        if imagePlayer != nil {
+            return
+        }
+        if let animatedImage = image as? SDAnimatedImageProvider {
+            if let imagePlayer = SDAnimatedImagePlayer(provider: animatedImage) {
+                imagePlayer.animationFrameHandler = { (_, frame) in
+                    self.currentFrame = frame
+                }
+                self.imagePlayer = imagePlayer
+                imagePlayer.startPlaying()
+            }
+        }
+    }
+}
+
 #if DEBUG
+@available(iOS 13.0, OSX 10.15, tvOS 13.0, watchOS 6.0, *)
 struct WebImage_Previews : PreviewProvider {
     static var previews: some View {
         Group {

@@ -9,10 +9,14 @@
 import UIKit
 import SwiftUI
 
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
+    static var current: SceneDelegate? {
+        return ((UIApplication.shared.delegate as? AppDelegate)?.sceneDelegate as? SceneDelegate)
+    }
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -20,14 +24,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
         // Create the SwiftUI view that provides the window contents.
-        let contentView = HomeView()
+//        self.setScene(for: .main)
+
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UIHostingController(rootView: contentView)
             self.window = window
-            window.makeKeyAndVisible()
+            
+            // Create the SwiftUI view that provides the window contents.
+            GlobalState.currentView = .welcome
+            self.setScene(for: .welcome)
+            
+            if let delegate = UIApplication.shared.delegate as? AppDelegate {
+                delegate.sceneDelegate = self
+            }
         }
     }
 
@@ -60,5 +71,36 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
 
+}
+
+extension SceneDelegate {
+    enum SceneOptions {
+        
+        // Welcome flow
+        case welcome
+        
+        // Main flow
+        case main
+
+
+        var root: UIViewController {
+            log.debug("\(self) : scene updated to root welcome view")
+            return UIHostingController(rootView: view() )
+        }
+        
+        func view() -> AnyView {
+            switch self {
+            case .main:
+                return AnyView(Main().environmentObject(GlobalState))
+            default:
+                return AnyView(Welcome().environmentObject(GlobalState))
+            }
+        }
+    }
+    
+    func setScene(for scene: SceneOptions) {
+        self.window?.rootViewController = scene.root
+        self.window?.makeKeyAndVisible()
+    }
 }
 

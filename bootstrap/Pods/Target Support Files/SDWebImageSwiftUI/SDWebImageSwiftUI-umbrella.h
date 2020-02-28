@@ -10,8 +10,6 @@
 #endif
 #endif
 
-#import "SDAnimatedImageInterface.h"
-#import "SDAnimatedImageInterfaceWrapper.h"
 #import "SDWebImageSwiftUI.h"
 
 FOUNDATION_EXPORT double SDWebImageSwiftUIVersionNumber;

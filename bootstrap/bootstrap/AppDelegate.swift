@@ -13,8 +13,13 @@ import SwiftyBeaver
 // Global var for log instance
 let log = SwiftyBeaver.self
 
+//- Declares global app state observable for current session
+var GlobalState: AppState = AppState()
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+
+    var sceneDelegate: UISceneDelegate?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

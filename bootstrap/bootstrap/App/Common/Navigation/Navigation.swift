@@ -107,7 +107,7 @@ struct NavigationItem {
 
 
 //MARK: - StackList
-// dictonary of stacks present in application if multiple are being used
+// TODO - update to make list
 struct StackList {
-    var stacks = [String : String]()
+    let homeStack: NavigationStack
 }

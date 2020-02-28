@@ -17,7 +17,7 @@ struct HomeView: View {
     var body: some View {
         ZStack{
             VStack{
-                NavigationBarView(title: "Welcome to hell" , leftButton: NavButton.back(tapFunction: {}, color: nil), rightButton: NavButton.profilePic(imageURL: nil, caption: "Gary", tapFunction: {}), backgroundColor: nil, titleColor: nil)
+                NavigationBarView(title: "Welcome to hell" , leftButton: nil/*NavButton.back(tapFunction: {}, color: nil)*/, rightButton: NavButton.profilePic(imageURL: nil, caption: "Gary", tapFunction: {}), backgroundColor: nil, titleColor: nil)
                 Spacer()
             }
             VStack{
@@ -26,8 +26,8 @@ struct HomeView: View {
                 PowerButton(power: self.$power)
                 Spacer()
             }
-        }.edgesIgnoringSafeArea(.bottom)
-            .background(Color.white)
+        }
+        .background(Color.white)
     }
 }
 
