@@ -26,6 +26,7 @@
 		E822103E2409641000AA1646 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E822103D2409641000AA1646 /* SearchBar.swift */; };
 		E82210402409908D00AA1646 /* BasicPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E822103F2409908D00AA1646 /* BasicPickerView.swift */; };
 		E82210422409A2BB00AA1646 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82210412409A2BB00AA1646 /* DatePickerView.swift */; };
+		E8221044240D4FBE00AA1646 /* PasswordVerify.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8221043240D4FBE00AA1646 /* PasswordVerify.swift */; };
 		E86ED4ED23FDAF62000A93F3 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86ED4EC23FDAF62000A93F3 /* HomeView.swift */; };
 		E86ED4EF23FDAF6F000A93F3 /* CommonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86ED4EE23FDAF6F000A93F3 /* CommonView.swift */; };
 		E86ED4F123FDAF79000A93F3 /* ComplexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86ED4F023FDAF79000A93F3 /* ComplexView.swift */; };
@@ -91,6 +92,7 @@
 		E822103D2409641000AA1646 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchBar.swift; path = bootstrap/App/Common/TextField/SearchBar.swift; sourceTree = SOURCE_ROOT; };
 		E822103F2409908D00AA1646 /* BasicPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicPickerView.swift; sourceTree = "<group>"; };
 		E82210412409A2BB00AA1646 /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
+		E8221043240D4FBE00AA1646 /* PasswordVerify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordVerify.swift; sourceTree = "<group>"; };
 		E86ED4EC23FDAF62000A93F3 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		E86ED4EE23FDAF6F000A93F3 /* CommonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonView.swift; sourceTree = "<group>"; };
 		E86ED4F023FDAF79000A93F3 /* ComplexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexView.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 				E822103D2409641000AA1646 /* SearchBar.swift */,
 				E822103F2409908D00AA1646 /* BasicPickerView.swift */,
 				E82210412409A2BB00AA1646 /* DatePickerView.swift */,
+				E8221043240D4FBE00AA1646 /* PasswordVerify.swift */,
 			);
 			path = TextField;
 			sourceTree = "<group>";
@@ -599,6 +602,7 @@
 				E018216323FD74EE006F9593 /* Navigation.swift in Sources */,
 				E82210402409908D00AA1646 /* BasicPickerView.swift in Sources */,
 				E8C12A5A2406F7C800094E59 /* HeatMapCalendar.swift in Sources */,
+				E8221044240D4FBE00AA1646 /* PasswordVerify.swift in Sources */,
 				E018216323FD74EE006F9593 /* Navigation.swift in Sources */,
 				E86ED4ED23FDAF62000A93F3 /* HomeView.swift in Sources */,
 				E82210422409A2BB00AA1646 /* DatePickerView.swift in Sources */,

@@ -12,10 +12,8 @@ struct HomeView: View {
     
     @State var events: [Date] = [Date]()
     
-    @State var search: String = ""
-    @State var selection: Date = Date()
-    var maxDate: Date?
-    var minDate: Date?
+    @State var status: Bool?
+    @State var password: String = ""
     
     var body: some View {
         ZStack{
@@ -26,10 +24,10 @@ struct HomeView: View {
             VStack{
                 Spacer()
                 // been using as workspace for testing components
+                PasswordVerifyTextField(password: $password, validStatus: $status, placeholder: "Enter here")
                 HeatMapCalendar(events: $events, heatColor: Color.blue)
                 Spacer()
             }.padding(.horizontal, 20)
-            DatePickerView(selection: $selection, show: .constant(true), components: nil , date: selection )
         }.edgesIgnoringSafeArea(.bottom)
         .background(Color.white)
         .onAppear{
@@ -59,6 +57,6 @@ extension HomeView{
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(events: [Date]() , search: "")
+        HomeView(events: [Date](), status: nil, password: "")
     }
 }
