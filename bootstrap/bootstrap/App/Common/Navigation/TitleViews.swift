@@ -70,7 +70,7 @@ enum NavButton {
     case back(tapFunction: ()->Void, color: Color?)
     case image(imageName: String, tapFunction: ()->Void)
     case text(text: String, tapFunction: ()->Void, color: Color?)
-    case profilePic(imageURL: URL?, caption: String?, tapFunction: ()->Void)
+    case profilePic(imageURL: URL?, caption: String?, tapFunction: ()->Void, frameColor: Color?)
     
     func view() -> AnyView {
         //- returns the view associated with the proper button
@@ -124,11 +124,11 @@ enum NavButton {
                 )
 
             //- PROFILE PIC
-        case let .profilePic(imageURL: imageURL, caption: caption, tapFunction: tapFunction):
+        case let .profilePic(imageURL: imageURL, caption: caption, tapFunction: tapFunction, frameColor: frameColor):
             return
                 AnyView(
                     VStack {
-                        ProfilePicture(borderColor: Color.blue, borderWidth: 1, imageURL: imageURL)
+                        ProfilePicture(borderColor: frameColor ?? Color.gray, borderWidth: 1, imageURL: imageURL)
                             .gesture(
                                 TapGesture()
                                     .onEnded{ _ in

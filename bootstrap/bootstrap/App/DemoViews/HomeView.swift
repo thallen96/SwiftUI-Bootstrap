@@ -10,16 +10,17 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @State var selected: VolumeButton.VolumeLevel = VolumeButton.VolumeLevel.high
-    
     @State var events: [Date] = [Date]()
     
-    @State var power: Bool = false
+    @State var search: String = ""
+    @State var selection: Date = Date()
+    var maxDate: Date?
+    var minDate: Date?
     
     var body: some View {
         ZStack{
             VStack{
-                NavigationBarView(title: "Welcome to hell" , leftButton: NavButton.back(tapFunction: {}, color: nil), rightButton: NavButton.profilePic(imageURL: nil, caption: "Gary", tapFunction: {}), backgroundColor: nil, titleColor: nil)
+                NavigationBarView(title: "Welcome to hell" , leftButton: NavButton.back(tapFunction: {}, color: nil), rightButton: NavButton.profilePic(imageURL: nil, caption: "Gary", tapFunction: {}, frameColor: Color.blue), backgroundColor: nil, titleColor: nil)
                 Spacer()
             }
             VStack{
@@ -27,9 +28,10 @@ struct HomeView: View {
                 // been using as workspace for testing components
                 HeatMapCalendar(events: $events, heatColor: Color.blue)
                 Spacer()
-            }
+            }.padding(.horizontal, 20)
+            DatePickerView(selection: $selection, show: .constant(true), components: nil , date: selection )
         }.edgesIgnoringSafeArea(.bottom)
-            .background(Color.white)
+        .background(Color.white)
         .onAppear{
             self.addFakeEvents()
         }
@@ -57,6 +59,6 @@ extension HomeView{
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        HomeView(events: [Date]() , search: "")
     }
 }
