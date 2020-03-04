@@ -10,26 +10,26 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @State var selected: VolumeButton.VolumeLevel = VolumeButton.VolumeLevel.high
-    
     @State var events: [Date] = [Date]()
     
-    @State var power: Bool = false
+    @State var status: Bool?
+    @State var password: String = ""
     
     var body: some View {
         ZStack{
             VStack{
-                NavigationBarView(title: "Welcome to hell" , leftButton: NavButton.back(tapFunction: {}, color: nil), rightButton: NavButton.profilePic(imageURL: nil, caption: "Gary", tapFunction: {}), backgroundColor: nil, titleColor: nil)
+                NavigationBarView(title: "Welcome to hell" , leftButton: NavButton.back(tapFunction: {}, color: nil), rightButton: NavButton.profilePic(imageURL: nil, caption: "Gary", tapFunction: {}, frameColor: Color.blue), backgroundColor: nil, titleColor: nil)
                 Spacer()
             }
             VStack{
                 Spacer()
                 // been using as workspace for testing components
+                PasswordVerifyTextField(password: $password, validStatus: $status, placeholder: "Enter here")
                 HeatMapCalendar(events: $events, heatColor: Color.blue)
                 Spacer()
-            }
+            }.padding(.horizontal, 20)
         }.edgesIgnoringSafeArea(.bottom)
-            .background(Color.white)
+        .background(Color.white)
         .onAppear{
             self.addFakeEvents()
         }
@@ -57,6 +57,6 @@ extension HomeView{
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        HomeView(events: [Date](), status: nil, password: "")
     }
 }
