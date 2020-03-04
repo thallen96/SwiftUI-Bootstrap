@@ -111,10 +111,10 @@ extension Text {
 
     var fakeButtonStylePrimary: some View {
         self
-            .padding(.vertical, 17)
-            .font(.custom(Avenir_Fonts.heavy, size: 18))
+            .padding(.vertical, 12)
+            .frame(width: 337, height: 34)
+            .scaledFont(name: Avenir_Fonts.medium, size: 15)
             .foregroundColor(.white)
-            .frame(width: 234, height: 46)
             .background(Color.blue)
             .cornerRadius(3)
             .shadow(color: Color.gray, radius: 1, x: 1, y: 1)

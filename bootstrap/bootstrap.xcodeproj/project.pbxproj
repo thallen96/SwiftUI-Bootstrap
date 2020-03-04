@@ -21,12 +21,17 @@
 		E018216323FD74EE006F9593 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E018216223FD74EE006F9593 /* Navigation.swift */; };
 		E018216823FD76FA006F9593 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = E018216623FD76FA006F9593 /* Podfile */; };
 		E018216923FD76FA006F9593 /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = E018216723FD76FA006F9593 /* Podfile.lock */; };
-		E806426A2405BC6C00F00047 /* SelectSingleDateCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80642692405BC6C00F00047 /* SelectSingleDateCalendar.swift */; };
 		E059919C2406E09700E33D84 /* KeyboardOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = E059919B2406E09700E33D84 /* KeyboardOverlay.swift */; };
 		E0DDF0C324096BA000AD0C48 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DDF0C224096BA000AD0C48 /* Main.swift */; };
 		E0DDF0C524096BAB00AD0C48 /* MainVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DDF0C424096BAB00AD0C48 /* MainVM.swift */; };
 		E0DDF0C724096BBA00AD0C48 /* Welcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DDF0C624096BBA00AD0C48 /* Welcome.swift */; };
 		E0DDF0C9240971F200AD0C48 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0DDF0C8240971F200AD0C48 /* AppState.swift */; };
+		E30F91135B36033A7CC87244 /* Pods_bootstrap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74715152A62DF31312026F17 /* Pods_bootstrap.framework */; };
+		E806426A2405BC6C00F00047 /* SelectSingleDateCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80642692405BC6C00F00047 /* SelectSingleDateCalendar.swift */; };
+		E822103E2409641000AA1646 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E822103D2409641000AA1646 /* SearchBar.swift */; };
+		E82210402409908D00AA1646 /* BasicPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E822103F2409908D00AA1646 /* BasicPickerView.swift */; };
+		E82210422409A2BB00AA1646 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82210412409A2BB00AA1646 /* DatePickerView.swift */; };
+		E8221044240D4FBE00AA1646 /* PasswordVerify.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8221043240D4FBE00AA1646 /* PasswordVerify.swift */; };
 		E86ED4ED23FDAF62000A93F3 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86ED4EC23FDAF62000A93F3 /* HomeView.swift */; };
 		E86ED4EF23FDAF6F000A93F3 /* CommonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86ED4EE23FDAF6F000A93F3 /* CommonView.swift */; };
 		E86ED4F123FDAF79000A93F3 /* ComplexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86ED4F023FDAF79000A93F3 /* ComplexView.swift */; };
@@ -86,12 +91,17 @@
 		E018216223FD74EE006F9593 /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
 		E018216623FD76FA006F9593 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		E018216723FD76FA006F9593 /* Podfile.lock */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile.lock; sourceTree = SOURCE_ROOT; };
-		E80642692405BC6C00F00047 /* SelectSingleDateCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SelectSingleDateCalendar.swift; path = bootstrap/App/Common/Calendar/SelectSingleDateCalendar.swift; sourceTree = SOURCE_ROOT; };
 		E059919B2406E09700E33D84 /* KeyboardOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardOverlay.swift; sourceTree = "<group>"; };
 		E0DDF0C224096BA000AD0C48 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		E0DDF0C424096BAB00AD0C48 /* MainVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVM.swift; sourceTree = "<group>"; };
 		E0DDF0C624096BBA00AD0C48 /* Welcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Welcome.swift; sourceTree = "<group>"; };
 		E0DDF0C8240971F200AD0C48 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		E6FE7DF7E5ED5087BE8AD1E4 /* Pods-bootstrap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bootstrap.debug.xcconfig"; path = "Target Support Files/Pods-bootstrap/Pods-bootstrap.debug.xcconfig"; sourceTree = "<group>"; };
+		E80642692405BC6C00F00047 /* SelectSingleDateCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SelectSingleDateCalendar.swift; path = bootstrap/App/Common/Calendar/SelectSingleDateCalendar.swift; sourceTree = SOURCE_ROOT; };
+		E822103D2409641000AA1646 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchBar.swift; path = bootstrap/App/Common/TextField/SearchBar.swift; sourceTree = SOURCE_ROOT; };
+		E822103F2409908D00AA1646 /* BasicPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicPickerView.swift; sourceTree = "<group>"; };
+		E82210412409A2BB00AA1646 /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
+		E8221043240D4FBE00AA1646 /* PasswordVerify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordVerify.swift; sourceTree = "<group>"; };
 		E86ED4EC23FDAF62000A93F3 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		E86ED4EE23FDAF6F000A93F3 /* CommonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonView.swift; sourceTree = "<group>"; };
 		E86ED4F023FDAF79000A93F3 /* ComplexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexView.swift; sourceTree = "<group>"; };
@@ -273,6 +283,10 @@
 		E018215B23FD73FC006F9593 /* TextField */ = {
 			isa = PBXGroup;
 			children = (
+				E822103D2409641000AA1646 /* SearchBar.swift */,
+				E822103F2409908D00AA1646 /* BasicPickerView.swift */,
+				E82210412409A2BB00AA1646 /* DatePickerView.swift */,
+				E8221043240D4FBE00AA1646 /* PasswordVerify.swift */,
 			);
 			path = TextField;
 			sourceTree = "<group>";
@@ -616,15 +630,19 @@
 			files = (
 				E0DDF0C324096BA000AD0C48 /* Main.swift in Sources */,
 				E8EB459C240450EC00770F84 /* SceneTransitionButtons.swift in Sources */,
-				E018216323FD74EE006F9593 /* NavigationStack.swift in Sources */,
+				E018216323FD74EE006F9593 /* Navigation.swift in Sources */,
+				E82210402409908D00AA1646 /* BasicPickerView.swift in Sources */,
 				E8C12A5A2406F7C800094E59 /* HeatMapCalendar.swift in Sources */,
+				E8221044240D4FBE00AA1646 /* PasswordVerify.swift in Sources */,
 				E018216323FD74EE006F9593 /* Navigation.swift in Sources */,
 				E86ED4ED23FDAF62000A93F3 /* HomeView.swift in Sources */,
+				E82210422409A2BB00AA1646 /* DatePickerView.swift in Sources */,
 				E86ED4FA23FDD3B5000A93F3 /* SFSymbols.swift in Sources */,
 				E0DDF0C9240971F200AD0C48 /* AppState.swift in Sources */,
 				E8EB459A240436EE00770F84 /* ImagePicker.swift in Sources */,
 				E86ED4EF23FDAF6F000A93F3 /* CommonView.swift in Sources */,
 				E059919C2406E09700E33D84 /* KeyboardOverlay.swift in Sources */,
+				E822103E2409641000AA1646 /* SearchBar.swift in Sources */,
 				E018212523FD729F006F9593 /* AppDelegate.swift in Sources */,
 				E8C12A582406B7B500094E59 /* SelectRangeDateCalendar.swift in Sources */,
 				E8EB459E240452FF00770F84 /* RadioButtons.swift in Sources */,
